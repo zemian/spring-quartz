@@ -3,6 +3,9 @@ package zemian.springquartz;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+/**
+ * Run our application in a command line prompt.
+ */
 @SpringBootApplication
 public class SpringQuartzApplication {
 
