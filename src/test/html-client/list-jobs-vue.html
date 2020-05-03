@@ -6,8 +6,8 @@
             <span class="tag">Total</span>
             <span class="tag is-primary" v-text="jobs.length"></span>
         </div>
-        <button class="button" v-on:click="fetchJobs">Refresh</button>
-        <button class="button" v-on:click="createTestJobs">Create Test Jobs</button>
+        <button class="button" @click="fetchJobs">Refresh</button>
+        <button class="button" @click="createTestJobs">Create Test Jobs</button>
     </div>
     <table class="table is-fullwidth">
         <thead>
