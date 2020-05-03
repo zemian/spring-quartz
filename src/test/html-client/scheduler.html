@@ -1,0 +1,38 @@
+<link rel="stylesheet" href="https://unpkg.com/bulma@0.8.2/css/bulma.css">
+<div id="app">
+    <h1 class="title">Jobs</h1>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Group</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr v-for="job in jobs">
+                <td v-text="job.group">Group</td>
+                <td v-text="job.name">Name</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<script src="https://unpkg.com/vue@2.6.11/dist/vue.js"></script>
+<script>
+    let app = new Vue({
+        data: {
+            jobs: []
+        },
+        created: function() {
+            let url = "http://localhost:8080/jobs";
+            // Get List of Jobs
+            fetch(url).then(resp => {
+                resp.json().then(data => {
+                    console.log("Received API data", data);
+                    this.jobs.push(...data.items);
+                });
+            });
+        }
+    });
+    app.$mount('#app');
+</script>
