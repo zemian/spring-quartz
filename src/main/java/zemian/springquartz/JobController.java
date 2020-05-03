@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import zemian.springquartz.data.CreateCronJob;
 import zemian.springquartz.data.CreateSimpleJob;
+import zemian.springquartz.data.ListData;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 
@@ -20,8 +22,11 @@ public class JobController {
     private Scheduler scheduler;
 
     @GetMapping("/jobs")
-    public Set<JobKey> listJobs() throws SchedulerException {
-        return scheduler.getJobKeys(GroupMatcher.anyJobGroup());
+    public ListData listJobs() throws SchedulerException {
+        Set<JobKey> keys = scheduler.getJobKeys(GroupMatcher.anyJobGroup());
+        ListData<JobKey> result = new ListData<>();
+        result.setItems(new ArrayList(keys));
+        return result;
     }
 
     @PostMapping("/jobs")
