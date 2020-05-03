@@ -1,0 +1,24 @@
+<script>
+    let url = "http://localhost:8080/jobs";
+
+    for (let i = 0; i < 10; i++) {
+        // Create Job
+        let sendData = {
+            jobDetail: {
+                name: "TestJob" + i,
+                jobClassName: "zemian.springquartz.LoggerJob"
+            },
+            trigger: {
+                repeatCount: 300,
+                repeatInterval: 1500
+            }
+        };
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(sendData)
+        }).then(resp => resp.text().then(data => console.log(data)));
+    }
+</script>

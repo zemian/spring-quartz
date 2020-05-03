@@ -1,0 +1,5 @@
+<script>
+    let url = "http://localhost:8080/jobs";
+    // Get List of Jobs
+    fetch(url).then(resp => resp.text().then(data => console.log(data)));
+</script>

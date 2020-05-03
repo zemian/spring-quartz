@@ -1,0 +1,21 @@
+<script>
+    let url = "http://localhost:8080/jobs/cron";
+
+    // Create Job
+    let sendData = {
+        jobDetail: {
+            name: "TestCronJob",
+            jobClassName: "zemian.springquartz.LoggerJob"
+        },
+        trigger: {
+            cron: "0 0 12 ? * WED"
+        }
+    };
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(sendData)
+    }).then(resp => resp.text().then(data => console.log(data)));
+</script>
