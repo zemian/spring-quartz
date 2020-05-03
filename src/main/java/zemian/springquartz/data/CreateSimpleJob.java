@@ -1,5 +1,7 @@
 package zemian.springquartz.data;
 
+import org.quartz.*;
+
 public class CreateSimpleJob {
     JobDetailData jobDetail;
     TriggerData trigger;
@@ -39,5 +41,22 @@ public class CreateSimpleJob {
         public void setRepeatInterval(long repeatInterval) {
             this.repeatInterval = repeatInterval;
         }
+    }
+
+    public JobDetail toJobDetail() throws Exception {
+        return CreateJobUtils.toJobDetail(getJobDetail());
+    }
+
+    public Trigger toTrigger() throws Exception {
+        CreateSimpleJob.TriggerData triggerData = getTrigger();
+        CreateJobUtils.autoSetTriggerNames(triggerData, getJobDetail());
+        SimpleScheduleBuilder schedule = SimpleScheduleBuilder.simpleSchedule().
+                withIntervalInMilliseconds(triggerData.getRepeatInterval()).
+                withRepeatCount(triggerData.getRepeatCount());
+        Trigger trigger = TriggerBuilder.newTrigger().
+                withIdentity(triggerData.getName(), triggerData.getGroup()).
+                withSchedule(schedule).
+                build();
+        return trigger;
     }
 }
