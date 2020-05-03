@@ -1,3 +1,35 @@
-<div id="create-jobs">
-    CREATE JOBS
+<div id="create-jobs" class="box">
+    <div class="notification is-success" v-if="createdJobKey">
+        <button class="delete" @click="resetNewJob"></button>
+        New job {{createdJobKey}} has been created.
+    </div>
+    <div class="field">
+        <label class="label">Job Name</label>
+        <div class="control">
+            <input class="input" type="text" v-model="jobName">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Job Class</label>
+        <div class="control">
+            <input class="input" type="text" v-model="jobClassName">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Repeat Count</label>
+        <div class="control">
+            <input class="input" type="text" v-model="repeatCount">
+        </div>
+    </div>
+    <div class="field">
+        <label class="label">Repeat Interval (millis seconds)</label>
+        <div class="control">
+            <input class="input" type="text" v-model="repeatInterval">
+        </div>
+    </div>
+    <div class="field">
+        <div class="control">
+            <button class="button is-link" @click="createJob">Submit</button>
+        </div>
+    </div>
 </div>
