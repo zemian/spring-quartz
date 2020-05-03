@@ -1,6 +1,9 @@
 <link rel="stylesheet" href="https://unpkg.com/bulma@0.8.2/css/bulma.css">
 <div id="app">
     <h1 class="title">Jobs</h1>
+    <div>
+        <button class="button" v-on:click="createTestJobs">Create Test Jobs</button>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -21,17 +24,52 @@
 <script>
     let app = new Vue({
         data: {
+            baseUrl: "http://localhost:8080",
             jobs: []
         },
-        created: function() {
-            let url = "http://localhost:8080/jobs";
-            // Get List of Jobs
-            fetch(url).then(resp => {
-                resp.json().then(data => {
-                    console.log("Received API data", data);
-                    this.jobs.push(...data.items);
+        created: function () {
+            this.populateJobs();
+        },
+        methods: {
+            populateJobs: function () {
+                // Get List of Jobs from backend
+                let url = this.baseUrl + "/jobs";
+                fetch(url).then(resp => {
+                    resp.json().then(data => {
+                        console.log("Received API data", data);
+                        this.jobs = data.items;
+                    });
                 });
-            });
+            },
+            createTestJobs: function () {
+                // Generate some fake jobs
+                let url = this.baseUrl + "/jobs";
+                for (let i = 0; i < 10; i++) {
+                    let jobName = "TestJob" + Math.random().toString(16).substring(2);
+                    let sendData = {
+                        jobDetail: {
+                            name: jobName,
+                            jobClassName: "zemian.springquartz.LoggerJob"
+                        },
+                        trigger: {
+                            repeatCount: 300,
+                            repeatInterval: 1500
+                        }
+                    };
+                    fetch(url, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify(sendData)
+                    }).then(resp => resp.text().then(data => {
+                        console.log(jobName + ' created' + data);
+                    }));
+                }
+
+                // Now refresh the job list
+                this.populateJobs();
+            }
         }
     });
     app.$mount('#app');
