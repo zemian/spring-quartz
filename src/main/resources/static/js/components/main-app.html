@@ -1,0 +1,7 @@
+<div id="main-app">
+    <div>
+        <button @click="componentName='list-jobs';">List</button>
+        <button @click="componentName='create-job';">Create</button>
+    </div>
+    <component v-bind:is="componentOptions"></component>
+</div>
