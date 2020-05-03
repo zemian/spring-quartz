@@ -10,9 +10,7 @@ import zemian.springquartz.data.CreateCronJob;
 import zemian.springquartz.data.CreateSimpleJob;
 import zemian.springquartz.data.ListData;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Set;
+import java.util.*;
 
 @CrossOrigin
 @RestController
@@ -26,6 +24,7 @@ public class JobController {
         Set<JobKey> keys = scheduler.getJobKeys(GroupMatcher.anyJobGroup());
         ListData<JobKey> result = new ListData<>();
         result.setItems(new ArrayList(keys));
+        result.getItems().sort(Comparator.naturalOrder());
         return result;
     }
 
