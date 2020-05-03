@@ -2,18 +2,24 @@
 <div id="app">
     <h1 class="title">Jobs</h1>
     <div>
+        <div class="tags has-addons is-inline">
+            <span class="tag">Total</span>
+            <span class="tag is-primary" v-text="jobs.length"></span>
+        </div>
         <button class="button" v-on:click="fetchJobs">Refresh</button>
         <button class="button" v-on:click="createTestJobs">Create Test Jobs</button>
     </div>
-    <table class="table">
+    <table class="table is-fullwidth">
         <thead>
             <tr>
+                <td>Num#</td>
                 <th>Group</th>
                 <th>Name</th>
             </tr>
         </thead>
         <tbody>
-            <tr v-for="job in jobs">
+            <tr v-for="(job, index) in jobs">
+                <td v-text="index + 1">Num#</td>
                 <td v-text="job.group">Group</td>
                 <td v-text="job.name">Name</td>
             </tr>
