@@ -1,7 +1,11 @@
 <div id="create-jobs" class="box">
     <div class="notification is-success" v-if="createdJobKey">
-        <button class="delete" @click="resetNewJob"></button>
-        New job {{createdJobKey}} has been created.
+        <button class="delete" @click="createdJobKey=null"></button>
+        New job {{createdJobKey.group}}.{{createdJobKey.name}} has been created.
+    </div>
+    <div class="notification is-danger" v-if="error">
+        <button class="delete" @click="error=null"></button>
+        New job {{error.message}} has been created.
     </div>
     <div class="field">
         <label class="label">Job Name</label>
@@ -27,9 +31,12 @@
             <input class="input" type="text" v-model="repeatInterval">
         </div>
     </div>
-    <div class="field">
+    <div class="field is-grouped">
         <div class="control">
             <button class="button is-link" @click="createJob">Submit</button>
+        </div>
+        <div class="control">
+            <button class="button" @click="resetNewJob">Reset</button>
         </div>
     </div>
 </div>

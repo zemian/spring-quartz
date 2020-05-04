@@ -8,11 +8,15 @@ define(['text!./create-job.html'], function(html) {
                 jobClassName: 'zemian.springquartz.LoggerJob',
                 repeatCount: 1,
                 repeatInterval: 60000,
-                createdJobKey: null
+                createdJobKey: null,
+                error: null
             }
         },
         methods: {
             createJob: function () {
+                this.createdJobKey = null;
+                this.error = null;
+
                 // Generate some fake jobs
                 let self = this;
                 let url = this.baseUrl + "/jobs";
@@ -33,11 +37,18 @@ define(['text!./create-job.html'], function(html) {
                     },
                     body: JSON.stringify(sendData)
                 }).then(resp => resp.json().then(data => {
-                    console.log('Job created ', data);
-                    this.createdJobKey = data;
-                }));
+                    console.log('POST response: ', data);
+                    if (data.error) {
+                        this.error = data;
+                    } else {
+                        this.createdJobKey = data;
+                    }
+                })).catch(error => {
+                    this.error = error;
+                });
             },
             resetNewJob: function () {
+                this.error = null;
                 this.createdJobKey = null;
                 this.jobName = 'MyJob-' + Math.random().toString(16).substring(2);
             }
