@@ -1,42 +1,47 @@
-<div id="create-jobs" class="box">
-    <div class="notification is-success" v-if="createdJobKey">
-        <button class="delete" @click="createdJobKey=null"></button>
-        New job {{createdJobKey.group}}.{{createdJobKey.name}} has been created.
-    </div>
-    <div class="notification is-danger" v-if="error">
-        <button class="delete" @click="error=null"></button>
-        New job {{error.message}} has been created.
-    </div>
-    <div class="field">
-        <label class="label">Job Name</label>
-        <div class="control">
-            <input class="input" type="text" v-model="jobName">
+<div id="create-jobs">
+    <h1 class="title">Create Job with Simple Trigger</h1>
+    <div>
+        <div class="notification is-success" v-if="createdJobKey">
+            <button class="delete" @click="createdJobKey=null"></button>
+            New job {{createdJobKey.group}}.{{createdJobKey.name}} has been created.
+        </div>
+        <div class="notification is-danger" v-if="error">
+            <button class="delete" @click="error=null"></button>
+            New job {{error.message}} has been created.
         </div>
     </div>
-    <div class="field">
-        <label class="label">Job Class</label>
-        <div class="control">
-            <input class="input" type="text" v-model="jobClassName">
+    <div class="box">
+        <div class="field">
+            <label class="label">Job Name</label>
+            <div class="control">
+                <input class="input" type="text" v-model="jobName">
+            </div>
         </div>
-    </div>
-    <div class="field">
-        <label class="label">Repeat Count</label>
-        <div class="control">
-            <input class="input" type="text" v-model="repeatCount">
+        <div class="field">
+            <label class="label">Job Class</label>
+            <div class="control">
+                <input class="input" type="text" v-model="jobClassName">
+            </div>
         </div>
-    </div>
-    <div class="field">
-        <label class="label">Repeat Interval (millis seconds)</label>
-        <div class="control">
-            <input class="input" type="text" v-model="repeatInterval">
+        <div class="field">
+            <label class="label">Repeat Count</label>
+            <div class="control">
+                <input class="input" type="text" v-model="repeatCount">
+            </div>
         </div>
-    </div>
-    <div class="field is-grouped">
-        <div class="control">
-            <button class="button is-link" @click="createJob">Submit</button>
+        <div class="field">
+            <label class="label">Repeat Interval (millis seconds)</label>
+            <div class="control">
+                <input class="input" type="text" v-model="repeatInterval">
+            </div>
         </div>
-        <div class="control">
-            <button class="button" @click="resetNewJob">Reset</button>
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-link" @click="createJob">Submit</button>
+            </div>
+            <div class="control">
+                <button class="button" @click="resetNewJob">Reset</button>
+            </div>
         </div>
     </div>
 </div>

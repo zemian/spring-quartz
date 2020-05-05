@@ -1,7 +1,23 @@
 <div id="main-app">
-    <div>
-        <button @click="componentName='list-jobs';">List</button>
-        <button @click="componentName='create-job';">Create</button>
+    <nav class="navbar is-transparent">
+        <div class="navbar-brand">
+            <a class="navbar-item" href="https://github.com/zemian/spring-quartz">
+                <img src="images/logo-quartz-scheduler.png" alt="Quartz Scheduler" width="112" height="28">
+            </a>
+            <div class="navbar-burger burger" data-target="quartzNav">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        <div id="quartzNav" class="navbar-menu">
+            <div class="navbar-start">
+                <a class="navbar-item" @click="componentName='list-jobs'">List</a>
+                <a class="navbar-item" @click="componentName='create-job'">Create</a>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <component v-bind:is="componentOptions"></component>
     </div>
-    <component v-bind:is="componentOptions"></component>
 </div>
